@@ -132,7 +132,9 @@ class ForwardInput < Input
       # Message
       time = msg[1]
       time = Engine.now if time == 0
-      record = msg[2]
+      parser = Yajl::Parser.new
+      record = parser.parse(msg[2])[0]
+      # record = msg[2]
       Engine.emit(tag, time, record)
     end
   end
